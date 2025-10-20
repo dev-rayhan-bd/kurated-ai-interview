@@ -3,6 +3,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { message } from "antd";
 import { useMakePaymentForCourseMutation } from "@/redux/feature/tools/tools-api";
+import { DataConstant } from "@/constants/data.constant";
 
 export default function PricingModal({ closeLockedModal }) {
   const [makePayment, { isLoading }] = useMakePaymentForCourseMutation();
@@ -44,7 +45,7 @@ export default function PricingModal({ closeLockedModal }) {
 
   const pricingPlans = [
     {
-      planId: "64aaede67bfd9cf2d9db7d32",
+      planId: DataConstant.INTERVIEW_PLAN.ONE_MONTH.id,
       title: "1-Month",
       duration: "1 Month",
       screenPrice: 1999,
@@ -58,7 +59,7 @@ export default function PricingModal({ closeLockedModal }) {
       saveText: null,
     },
     {
-      planId: "64aaede67bfd9cf2d9db7d33",
+      planId: DataConstant.INTERVIEW_PLAN.THREE_MONTH.id,
       title: "3-Month",
       duration: "3 Months",
       screenPrice: 5399,
@@ -72,7 +73,7 @@ export default function PricingModal({ closeLockedModal }) {
       saveText: "Save 10%",
     },
     {
-      planId: "66915e15c8ea3a61a6d18a46",
+      planId: DataConstant.INTERVIEW_PLAN.SIX_MONTH.id,
       title: "6-Month",
       duration: "6 Months",
       screenPrice: 9999,
@@ -113,7 +114,9 @@ export default function PricingModal({ closeLockedModal }) {
       }
     } catch (error) {
       console.error("payment error------->", error);
-      message.error(error?.data?.message || "Payment failed. Please try again.");
+      message.error(
+        error?.data?.message || "Payment failed. Please try again."
+      );
     }
   };
 
@@ -133,14 +136,20 @@ export default function PricingModal({ closeLockedModal }) {
             viewBox="0 0 24 24"
             strokeWidth={2}
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
 
         <div className="grid lg:grid-cols-[380px_1fr] gap-12 p-8 lg:p-12">
           {/* Left Section */}
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-green-600">Our Plan Highlights</h2>
+            <h2 className="text-2xl font-bold text-green-600">
+              Our Plan Highlights
+            </h2>
             <ul className="space-y-4">
               {[
                 "Proven Frameworks",
@@ -177,7 +186,9 @@ export default function PricingModal({ closeLockedModal }) {
                 <div
                   key={plan.planId}
                   className={`relative border rounded-xl p-6 flex flex-col bg-white text-center transition-all duration-300 ${
-                    plan.isPopular ? `${color.border} border-2 shadow-md` : "border-gray-300"
+                    plan.isPopular
+                      ? `${color.border} border-2 shadow-md`
+                      : "border-gray-300"
                   }`}
                 >
                   {/* Popular Badge */}
@@ -189,7 +200,9 @@ export default function PricingModal({ closeLockedModal }) {
                     </div>
                   )}
 
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2 mt-4">{plan.title}</h3>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2 mt-4">
+                    {plan.title}
+                  </h3>
 
                   {/* Price */}
                   <div className="text-center mb-2">
@@ -199,13 +212,20 @@ export default function PricingModal({ closeLockedModal }) {
                       </div>
                     )}
                     <div className="flex items-start justify-center">
-                      <span className={`${color.text} text-xl font-bold mr-0.5 mt-1`}>$</span>
-                      <span className={`${color.text} text-5xl font-bold leading-none`}>
+                      <span
+                        className={`${color.text} text-xl font-bold mr-0.5 mt-1`}
+                      >
+                        $
+                      </span>
+                      <span
+                        className={`${color.text} text-5xl font-bold leading-none`}
+                      >
                         {(plan.screenPrice / 100).toFixed(2).split(".")[0]}
                       </span>
-                      <span className={`${color.text} text-base font-bold mt-1`}>
-                        .
-                        {(plan.screenPrice / 100).toFixed(2).split(".")[1]}
+                      <span
+                        className={`${color.text} text-base font-bold mt-1`}
+                      >
+                        .{(plan.screenPrice / 100).toFixed(2).split(".")[1]}
                       </span>
                     </div>
                   </div>
@@ -222,7 +242,9 @@ export default function PricingModal({ closeLockedModal }) {
                   )}
 
                   <p className="text-gray-600 text-sm mb-6 flex-grow">
-                    <span className={`${color.text} font-semibold`}>{plan.highlight}</span>
+                    <span className={`${color.text} font-semibold`}>
+                      {plan.highlight}
+                    </span>
                   </p>
 
                   {/* CTA */}
